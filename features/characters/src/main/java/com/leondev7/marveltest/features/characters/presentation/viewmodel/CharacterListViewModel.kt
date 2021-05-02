@@ -5,7 +5,7 @@ import com.leondev7.marveltest.core.components.base.ComponentState
 import com.leondev7.marveltest.features.characters.domain.model.Character
 import com.leondev7.marveltest.features.characters.domain.repository.ICharactersRepository
 import com.leondev7.marveltest.core.components.base.ScreenState
-import com.leondev7.marveltest.features.characters.presentation.component.base.ListState
+import com.leondev7.marveltest.features.characters.presentation.component.base.CharacterState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
@@ -17,6 +17,9 @@ import javax.inject.Inject
 const val PAGE_INIT_ELEMENTS = 0
 const val PAGE_MAX_ELEMENTS = 10
 
+/**
+ * List view model to hold logic related to the CharacterListFragment
+ */
 @HiltViewModel
 class CharacterListViewModel @Inject constructor(
     private val savedStateHandle: SavedStateHandle,
@@ -24,13 +27,23 @@ class CharacterListViewModel @Inject constructor(
 
 ) : ViewModel() {
 
+    /**
+     * The state of the screen
+     */
     private val _screenState = MutableStateFlow<ComponentState>(ScreenState.Loading)
     val screenState = _screenState.asStateFlow()
 
     init {
-      getCharacters(PAGE_INIT_ELEMENTS)
+      getCharactersFromScratch()
     }
 
+    /**
+     * Gets the characters from the repo.
+     * If the previous state was [CharacterState.ListLoaded] it adds the new characters to the
+     * previous state and emits the state
+     * In case of error, retries 3 times and then emits an error
+     * @param offset the number of characters to skip
+     */
     fun getCharacters(offset : Int){
         viewModelScope.launch {
             var currentDelay = 1000L
@@ -52,12 +65,12 @@ class CharacterListViewModel @Inject constructor(
                 }
 
         }.collect { newCharacters->
-                if(screenState.value is ListState.ListLoaded){
-                    val characters :ArrayList<Character> =  (screenState.value as ListState.ListLoaded).characterList as ArrayList<Character>
+                if(screenState.value is CharacterState.ListLoaded){
+                    val characters :ArrayList<Character> =  (screenState.value as CharacterState.ListLoaded).characterList as ArrayList<Character>
                     characters.addAll(newCharacters)
-                    _screenState.emit(ListState.ListLoaded(characters))
+                    _screenState.emit(CharacterState.ListLoaded(characters))
                 }else{
-                    _screenState.emit(ListState.ListLoaded(newCharacters))
+                    _screenState.emit(CharacterState.ListLoaded(newCharacters))
 
                 }
         }
@@ -66,9 +79,12 @@ class CharacterListViewModel @Inject constructor(
         }
     }
 
+    /**
+     * Helper method to get all the starting characters
+     */
     fun getCharactersFromScratch(){
         runBlocking {_screenState.emit(ScreenState.Loading)  }
-        getCharacters(0)
+        getCharacters(PAGE_INIT_ELEMENTS)
     }
 
 

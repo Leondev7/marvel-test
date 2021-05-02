@@ -1,16 +1,18 @@
 package com.leondev7.marveltest.features.characters.presentation.component.characterdetail
 
-import android.util.Log
 import android.view.ViewGroup
 import com.leondev7.marveltest.features.characters.domain.model.Character
 import com.leondev7.marveltest.core.components.base.ComponentState
 import com.leondev7.marveltest.core.components.base.MVIComponent
-import com.leondev7.marveltest.core.components.base.ScreenState
+import com.leondev7.marveltest.features.characters.presentation.component.base.CharacterState
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
+/**
+ * Component to hold a detail of a Marvel Character
+ */
 open class CharacterDetailComponent(
     container: ViewGroup,
     uiScope : CoroutineScope,
@@ -42,8 +44,7 @@ open class CharacterDetailComponent(
         uiScope.launch {
          state.collect {state->
              when (state) {
-                 is ScreenState.DetailLoaded -> {
-                     Log.d("ZZTOP","Loaded, show")
+                 is CharacterState.DetailLoaded -> {
                      loadData(state.character)
                      show()
                  }

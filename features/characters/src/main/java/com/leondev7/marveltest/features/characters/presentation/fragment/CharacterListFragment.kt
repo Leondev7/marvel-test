@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import com.leondev7.marveltest.features.characters.R
 import com.leondev7.marveltest.features.characters.domain.model.Character
 import com.leondev7.marveltest.core.components.base.UserInteractionEvents
@@ -75,19 +76,36 @@ class CharacterListFragment : Fragment(), UserInteractionEvents, ListInteraction
         )
     }
 
+    /**
+     * Retry intent in case of error
+     */
     override fun intentTapRetry() {
         charactersViewModel.getCharactersFromScratch()
     }
 
+    /**
+     * Reload intent in case of swipe
+     */
     override fun intentSwipe() {
         charactersViewModel.getCharactersFromScratch()
     }
 
+    /**
+     * Load more characters in case of list end reached
+     * @param numberOfItems the current number items to load as an offset
+     */
     override fun intentEndReached(numberOfItems: Int) {
         charactersViewModel.getCharacters(numberOfItems)
     }
 
+    /**
+     * Character clicked event, navigate to detail
+     * @param character the character clicked
+     */
     override fun onCharacterClicked(character: Character) {
-
+        findNavController(
+        ).navigate(
+            CharacterListFragmentDirections.
+            actionCharactersFragmentToDetailFragment(characterId = character.id))
     }
 }

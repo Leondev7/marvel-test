@@ -3,13 +3,16 @@ package com.leondev7.marveltest.features.characters.presentation.component.chara
 import android.view.ViewGroup
 import com.leondev7.marveltest.features.characters.domain.model.Character
 import com.leondev7.marveltest.core.components.base.*
+import com.leondev7.marveltest.features.characters.presentation.component.base.CharacterState
 import com.leondev7.marveltest.features.characters.presentation.component.base.ListInteractionEvents
-import com.leondev7.marveltest.features.characters.presentation.component.base.ListState
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
+/**
+ * Component to hold a list of Marvel characters
+ */
 open class CharacterListComponent(
     container: ViewGroup,
     uiScope : CoroutineScope,
@@ -42,7 +45,7 @@ open class CharacterListComponent(
         uiScope.launch {
             state.collect {state->
                 when (state) {
-                    is ListState.ListLoaded -> {
+                    is CharacterState.ListLoaded -> {
                         updateList(state.characterList)
                         show()
                     }

@@ -18,6 +18,10 @@ enum class ListViewState{
 }
 
 const val SPAN_COUNT = 1
+
+/**
+ * UI View related to [CharacterListComponent]
+ */
 class CharacterListView(container: ViewGroup, listInteractionEvents: ListInteractionEvents) :
     UIView(container) {
 

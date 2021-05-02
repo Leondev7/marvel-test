@@ -11,6 +11,9 @@ import com.leondev7.marveltest.features.characters.R
 import com.leondev7.marveltest.features.characters.domain.model.Character
 import com.leondev7.marveltest.core.components.base.UIView
 
+/**
+ * View related to [CharacterDetailComponent]
+ */
 class CharacterDetailView(container: ViewGroup) :
     UIView(container) {
     private val view: View =

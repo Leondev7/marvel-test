@@ -2,6 +2,7 @@ package com.leondev7.marveltest.features.characters.presentation.fragment
 
 import android.annotation.SuppressLint
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -17,6 +18,7 @@ import com.leondev7.marveltest.core.components.error.ErrorComponent
 import com.leondev7.marveltest.core.components.loading.LoadingComponent
 import com.leondev7.marveltest.features.characters.presentation.viewmodel.CharacterDetailViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.runBlocking
 
 
 /**
@@ -42,6 +44,21 @@ class CharacterDetailFragment : Fragment(), UserInteractionEvents {
         val root = view.findViewById<ConstraintLayout>(R.id.root)
         initComponents(root)
         return view
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        val bundle = arguments
+        if (bundle == null) {
+            Log.e("Confirmation",
+                "CharacterDetailFragment did not receive character information"
+            )
+            return
+        }
+        val args = CharacterDetailFragmentArgs.fromBundle(bundle)
+        runBlocking { detailViewModel.characterId.emit(args.characterId) }
+
     }
 
 
@@ -75,6 +92,9 @@ class CharacterDetailFragment : Fragment(), UserInteractionEvents {
 
     }
 
+    /**
+     * Retry intent in case of error
+     */
     override fun intentTapRetry() {
         detailViewModel.getCharacterDetail()
     }
