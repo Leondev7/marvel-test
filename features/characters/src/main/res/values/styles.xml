@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name= "Text.Title" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:textSize">@dimen/title_text_size</item>
+        <item name="android:textColor">@color/title_color</item>
+        <item name="android:layout_gravity">center</item>
+        <item name="android:layout_marginTop">@dimen/padding_small</item>
+
+    </style>
+
+    <style name= "Text.Dialog.Body" parent="Text.Title">
+        <item name="android:fontFamily">sans-serif-light</item>
+        <item name="android:textSize">@dimen/body_text_size</item>
+        <item name="android:textColor">@color/body_color</item>
+    </style>
+
+    <style name= "Text.Dialog.Bullet" parent="Text.Title">
+        <item name="android:fontFamily">sans-serif-bold</item>
+        <item name="android:textSize">@dimen/bullet_text_size</item>
+    </style>
+</resources>
