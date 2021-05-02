@@ -104,11 +104,11 @@ so I don't have a lot of experience with it. I really didn't know how it worked 
 decided not to take risks and try this in this project. I will probably will improve this repo in a
 future or make a fork with dynamic features just to see how it plays out.
 
-##Navigation
+## Navigation
 Right now the project has only Navigation within a feature, but if we wanted to have feature to
 feature Navigation, the way to go is dynamic features and the dynamic features navigation library.
 
-##Cleartext traffic
+## Cleartext traffic
 This is a no-no for security. But I really don't know how many endpoints the marvel API needs to be
 allowed for images and all its dependencies, so I decided to go with allowing everything
 
