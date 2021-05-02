@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="character_row_height">200dp</dimen>
+    <dimen name="character_row_gradient_height">100dp</dimen>
+</resources>
