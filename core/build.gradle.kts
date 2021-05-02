@@ -62,6 +62,7 @@ dependencies {
     //Android
     implementation (Android.coreKTX)
     implementation (Android.materialX)
+    implementation (Android.constraintLayoutX)
     implementation (Android.appcompatX)
 
     //Ktor

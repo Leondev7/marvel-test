@@ -1,10 +1,10 @@
-package com.leondev7.marveltest.features.characters.presentation.component.loading
+package com.leondev7.marveltest.core.components.loading
 
 import android.view.ViewGroup
 import androidx.annotation.VisibleForTesting
-import com.leondev7.marveltest.features.characters.presentation.component.base.ComponentState
-import com.leondev7.marveltest.features.characters.presentation.component.base.MVIComponent
-import com.leondev7.marveltest.features.characters.presentation.component.base.ScreenState
+import com.leondev7.marveltest.core.components.base.ComponentState
+import com.leondev7.marveltest.core.components.base.MVIComponent
+import com.leondev7.marveltest.core.components.base.ScreenState
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.collect

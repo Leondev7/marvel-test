@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="txt_empty">Empty list</string>
+    <string name="txt_description">Description</string>
+    <string name="btn_retry">Retry</string>
+</resources>

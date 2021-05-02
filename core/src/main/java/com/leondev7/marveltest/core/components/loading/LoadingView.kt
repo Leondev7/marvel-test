@@ -1,11 +1,11 @@
-package com.leondev7.marveltest.features.characters.presentation.component.loading
+package com.leondev7.marveltest.core.components.loading
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.leondev7.marveltest.features.characters.R
-import com.leondev7.marveltest.features.characters.presentation.component.base.UIView
+import com.leondev7.marveltest.core.R
+import com.leondev7.marveltest.core.components.base.UIView
 
 class LoadingView(container: ViewGroup) : UIView(container) {
 

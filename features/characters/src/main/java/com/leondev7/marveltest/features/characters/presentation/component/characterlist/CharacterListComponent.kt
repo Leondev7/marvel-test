@@ -2,7 +2,9 @@ package com.leondev7.marveltest.features.characters.presentation.component.chara
 
 import android.view.ViewGroup
 import com.leondev7.marveltest.features.characters.domain.model.Character
-import com.leondev7.marveltest.features.characters.presentation.component.base.*
+import com.leondev7.marveltest.core.components.base.*
+import com.leondev7.marveltest.features.characters.presentation.component.base.ListInteractionEvents
+import com.leondev7.marveltest.features.characters.presentation.component.base.ListState
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.collect
@@ -40,7 +42,7 @@ open class CharacterListComponent(
         uiScope.launch {
             state.collect {state->
                 when (state) {
-                    is ScreenState.ListLoaded -> {
+                    is ListState.ListLoaded -> {
                         updateList(state.characterList)
                         show()
                     }

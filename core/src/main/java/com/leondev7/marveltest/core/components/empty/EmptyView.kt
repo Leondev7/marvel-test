@@ -1,11 +1,11 @@
-package com.leondev7.marveltest.features.characters.presentation.component.empty
+package com.leondev7.marveltest.core.components.empty
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.leondev7.marveltest.features.characters.R
-import com.leondev7.marveltest.features.characters.presentation.component.base.UIView
+import com.leondev7.marveltest.core.R
+import com.leondev7.marveltest.core.components.base.UIView
 
 class EmptyView(container: ViewGroup) : UIView(container) {
 

@@ -1,9 +1,11 @@
 package com.leondev7.marveltest.features.characters.presentation.viewmodel
 
 import androidx.lifecycle.*
+import com.leondev7.marveltest.core.components.base.ComponentState
 import com.leondev7.marveltest.features.characters.domain.model.Character
 import com.leondev7.marveltest.features.characters.domain.repository.ICharactersRepository
-import com.leondev7.marveltest.features.characters.presentation.component.base.ScreenState
+import com.leondev7.marveltest.core.components.base.ScreenState
+import com.leondev7.marveltest.features.characters.presentation.component.base.ListState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
@@ -22,7 +24,7 @@ class CharacterListViewModel @Inject constructor(
 
 ) : ViewModel() {
 
-    private val _screenState = MutableStateFlow<ScreenState>(ScreenState.Loading)
+    private val _screenState = MutableStateFlow<ComponentState>(ScreenState.Loading)
     val screenState = _screenState.asStateFlow()
 
     init {
@@ -50,12 +52,12 @@ class CharacterListViewModel @Inject constructor(
                 }
 
         }.collect { newCharacters->
-                if(screenState.value is ScreenState.ListLoaded){
-                    val characters :ArrayList<Character> =  (screenState.value as ScreenState.ListLoaded).characterList as ArrayList<Character>
+                if(screenState.value is ListState.ListLoaded){
+                    val characters :ArrayList<Character> =  (screenState.value as ListState.ListLoaded).characterList as ArrayList<Character>
                     characters.addAll(newCharacters)
-                    _screenState.emit(ScreenState.ListLoaded(characters))
+                    _screenState.emit(ListState.ListLoaded(characters))
                 }else{
-                    _screenState.emit(ScreenState.ListLoaded(newCharacters))
+                    _screenState.emit(ListState.ListLoaded(newCharacters))
 
                 }
         }

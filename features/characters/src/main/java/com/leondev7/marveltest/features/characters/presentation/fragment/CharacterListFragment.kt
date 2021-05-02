@@ -11,12 +11,12 @@ import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
 import com.leondev7.marveltest.features.characters.R
 import com.leondev7.marveltest.features.characters.domain.model.Character
-import com.leondev7.marveltest.features.characters.presentation.component.base.ListInteractionEvents
-import com.leondev7.marveltest.features.characters.presentation.component.base.UserInteractionEvents
+import com.leondev7.marveltest.core.components.base.UserInteractionEvents
 import com.leondev7.marveltest.features.characters.presentation.component.characterlist.CharacterListComponent
-import com.leondev7.marveltest.features.characters.presentation.component.empty.EmptyListComponent
-import com.leondev7.marveltest.features.characters.presentation.component.error.ErrorComponent
-import com.leondev7.marveltest.features.characters.presentation.component.loading.LoadingComponent
+import com.leondev7.marveltest.core.components.empty.EmptyListComponent
+import com.leondev7.marveltest.core.components.error.ErrorComponent
+import com.leondev7.marveltest.core.components.loading.LoadingComponent
+import com.leondev7.marveltest.features.characters.presentation.component.base.ListInteractionEvents
 import com.leondev7.marveltest.features.characters.presentation.viewmodel.CharacterListViewModel
 import dagger.hilt.android.AndroidEntryPoint
 

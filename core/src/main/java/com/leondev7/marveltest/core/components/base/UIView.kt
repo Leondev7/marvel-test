@@ -1,4 +1,4 @@
-package com.leondev7.marveltest.features.characters.presentation.component.base
+package com.leondev7.marveltest.core.components.base
 
 import android.os.Bundle
 import android.view.ViewGroup

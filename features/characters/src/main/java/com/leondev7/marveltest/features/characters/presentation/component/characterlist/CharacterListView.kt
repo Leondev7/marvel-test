@@ -1,7 +1,6 @@
 package com.leondev7.marveltest.features.characters.presentation.component.characterlist
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,12 +9,11 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.leondev7.marveltest.features.characters.R
 import com.leondev7.marveltest.features.characters.domain.model.Character
-
+import com.leondev7.marveltest.core.components.base.UIView
 import com.leondev7.marveltest.features.characters.presentation.component.base.ListInteractionEvents
-import com.leondev7.marveltest.features.characters.presentation.component.base.UIView
 import com.leondev7.marveltest.features.characters.presentation.component.characterlist.adapter.CharacterAdapter
 
-enum class ListState{
+enum class ListViewState{
     LOADING,LOADED
 }
 
@@ -23,7 +21,7 @@ const val SPAN_COUNT = 1
 class CharacterListView(container: ViewGroup, listInteractionEvents: ListInteractionEvents) :
     UIView(container) {
 
-    private var state = ListState.LOADED
+    private var state = ListViewState.LOADED
 
     private val view: View =
         LayoutInflater.from(container.context).inflate(R.layout.layout_character_list, container, true)
@@ -45,8 +43,8 @@ class CharacterListView(container: ViewGroup, listInteractionEvents: ListInterac
 
             override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
                 super.onScrollStateChanged(recyclerView, newState)
-                if (!recyclerView.canScrollVertically(1) && newState == RecyclerView.SCROLL_STATE_IDLE && state == ListState.LOADED) {
-                    submitState(ListState.LOADING)
+                if (!recyclerView.canScrollVertically(1) && newState == RecyclerView.SCROLL_STATE_IDLE && state == ListViewState.LOADED) {
+                    submitState(ListViewState.LOADING)
                     val totalItemCount: Int = recyclerView.layoutManager!!.itemCount
                     listInteractionEvents.intentEndReached(totalItemCount)
                 }
@@ -55,7 +53,7 @@ class CharacterListView(container: ViewGroup, listInteractionEvents: ListInterac
 
     }
 
-    private fun submitState(listState: ListState){
+    private fun submitState(listState: ListViewState){
         state = listState
     }
 
@@ -71,7 +69,7 @@ class CharacterListView(container: ViewGroup, listInteractionEvents: ListInterac
     fun updateCharacters(characters: List<Character>) {
         view.findViewById<SwipeRefreshLayout>(R.id.swipe_refresh).isRefreshing = false
         adapter.data = characters
-        submitState(ListState.LOADED)
+        submitState(ListViewState.LOADED)
     }
 
 

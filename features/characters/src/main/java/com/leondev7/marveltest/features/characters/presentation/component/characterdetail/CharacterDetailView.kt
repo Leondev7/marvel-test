@@ -9,7 +9,7 @@ import android.widget.TextView
 import com.leondev7.marveltest.core.extensions.getImageByUrlCenterCrop
 import com.leondev7.marveltest.features.characters.R
 import com.leondev7.marveltest.features.characters.domain.model.Character
-import com.leondev7.marveltest.features.characters.presentation.component.base.UIView
+import com.leondev7.marveltest.core.components.base.UIView
 
 class CharacterDetailView(container: ViewGroup) :
     UIView(container) {
