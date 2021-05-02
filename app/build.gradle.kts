@@ -54,16 +54,12 @@ dependencies {
     implementation (Android.materialX)
     implementation (Android.appcompatX)
     implementation (Android.constraintLayoutX)
-    implementation (Android.livedataX)
-    implementation (Android.viewmodelX)
-    implementation (Android.fragmentX)
 
     //Hilt
     implementation (Hilt.hilt)
     kapt(Hilt.compiler)
 
     //Navigation
-    implementation(Navigation.navFragment)
     implementation(Navigation.navUI)
 
 

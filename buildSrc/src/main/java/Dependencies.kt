@@ -39,8 +39,6 @@ object BuildConfig {
     const val VERSION_CODE = 1
     const val VERSION_NAME = "1.0"
 
-    const val SUPPORT_LIBRARY_VECTOR_DRAWABLES = true
-
     const val TEST_INSTRUMENTATION_RUNNER = "androidx.test.runner.AndroidJUnitRunner"
 
 }
@@ -52,7 +50,6 @@ object Android{
     const val fragmentX = "androidx.fragment:fragment-ktx:${Versions.fragment}"
     const val coreKTX = "androidx.core:core-ktx:${Versions.coreKTX}"
     const val constraintLayoutX = "androidx.constraintlayout:constraintlayout:${Versions.constraintLayout}"
-    const val livedataX = "androidx.lifecycle:lifecycle-livedata-ktx:${Versions.lifecycle}"
     const val viewmodelX = "androidx.lifecycle:lifecycle-viewmodel-ktx:${Versions.lifecycle}"
     const val recyclerView = "androidx.recyclerview:recyclerview:${Versions.recyclerView}"
     const val swypeRefreshLayout = "androidx.swiperefreshlayout:swiperefreshlayout:${Versions.swipeRefresh}"
@@ -61,7 +58,6 @@ object Android{
 object Navigation{
     const val navUI = "androidx.navigation:navigation-ui-ktx:${Versions.navigation}"
     const val navFragment = "androidx.navigation:navigation-fragment-ktx:${Versions.navigation}"
-    const val navCore = "androidx.navigation:navigation-fragment-ktx:${Versions.navigation}"
 }
 
 object Ktor{

@@ -61,9 +61,7 @@ dependencies {
     implementation (Kotlin.stdlib)
     //Android
     implementation (Android.coreKTX)
-    implementation (Android.materialX)
     implementation (Android.constraintLayoutX)
-    implementation (Android.appcompatX)
 
     //Ktor
     implementation(Ktor.clientCore)

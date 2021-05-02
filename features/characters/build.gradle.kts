@@ -49,9 +49,7 @@ dependencies {
     //Android
     implementation (Android.coreKTX)
     implementation (Android.materialX)
-    implementation (Android.appcompatX)
     implementation (Android.constraintLayoutX)
-    implementation (Android.livedataX)
     implementation (Android.viewmodelX)
     implementation (Android.fragmentX)
     implementation(Android.swypeRefreshLayout)
