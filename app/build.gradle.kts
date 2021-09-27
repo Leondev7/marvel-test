@@ -1,19 +1,18 @@
 plugins {
-    id("com.android.application")
-    kotlin("android")
-    kotlin("android.extensions")
-    id( "kotlin-kapt")
-    id("dagger.hilt.android.plugin")
-    id("androidx.navigation.safeargs.kotlin")
+    id(BuildPlugins.ANDROID_APPLICATION)
+    id(BuildPlugins.KOTLIN_ANDROID)
+    id(BuildPlugins.SAFEARGS)
+    id(BuildPlugins.KOTLIN_KAPT)
 }
 
 android {
-    compileSdkVersion(BuildConfig.COMPILE_SDK_VERSION)
-    buildToolsVersion = BuildConfig.BUILD_TOOLS_VERSION
+    compileSdk = BuildConfig.COMPILE_SDK
+    buildToolsVersion = BuildConfig.BUILD_TOOLS
+
     defaultConfig {
         applicationId = BuildConfig.APPLICATION_ID
-        minSdkVersion(BuildConfig.MIN_SDK_VERSION)
-        targetSdkVersion(BuildConfig.TARGET_SDK_VERSION)
+        minSdk = BuildConfig.MIN_SDK
+        targetSdk = BuildConfig.TARGET_SDK
         versionCode = BuildConfig.VERSION_CODE
         versionName = BuildConfig.VERSION_NAME
         testInstrumentationRunner = BuildConfig.TEST_INSTRUMENTATION_RUNNER
@@ -38,29 +37,33 @@ android {
     }
 
     kotlinOptions {
-        jvmTarget = "1.8"
+        jvmTarget = Versions.jvm
     }
 
 }
 
 dependencies {
 
-    implementation(project(":core"))
-    implementation(project(":features:characters"))
-    //Kotlin
-    implementation (Kotlin.stdlib)
+    //Modules
+    implementation( project(BuildModules.CORE))
+    implementation( project(BuildModules.Features.CHARACTERS))
+
+    //Dependency Injection
+    implementation(Dependencies.DI.koin)
+    implementation(Dependencies.DI.koinAndroid)
+
+    //Stdlib
+    implementation( Dependencies.Kotlin.stdlib)
     //Android
-    implementation (Android.coreKTX)
-    implementation (Android.materialX)
-    implementation (Android.appcompatX)
-    implementation (Android.constraintLayoutX)
+    implementation (Dependencies.AndroidX.ktx)
+    implementation (Dependencies.AndroidX.constraintLayout)
+    implementation (Dependencies.AndroidX.appcompat)
 
     //Hilt
-    implementation (Hilt.hilt)
-    kapt(Hilt.compiler)
 
     //Navigation
-    implementation(Navigation.navUI)
+    implementation (Dependencies.AndroidX.navigation)
+    implementation (Dependencies.AndroidX.navigationUI)
 
 
 

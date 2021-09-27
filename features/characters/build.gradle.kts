@@ -1,18 +1,17 @@
 plugins {
-    id ("com.android.library")
-    kotlin("android")
-    kotlin("android.extensions")
-    id( "kotlin-kapt")
-    id("dagger.hilt.android.plugin")
-    id("androidx.navigation.safeargs.kotlin")
+    id(BuildPlugins.ANDROID_LIBRARY)
+    id(BuildPlugins.KOTLIN_ANDROID)
+    id(BuildPlugins.KOTLIN_PARCELIZE)
+    id(BuildPlugins.SAFEARGS)
 }
 android {
-    compileSdkVersion(BuildConfig.COMPILE_SDK_VERSION)
-    buildToolsVersion = BuildConfig.BUILD_TOOLS_VERSION
+    compileSdk = BuildConfig.COMPILE_SDK
+    buildToolsVersion = BuildConfig.BUILD_TOOLS
 
     defaultConfig {
-        minSdkVersion(BuildConfig.MIN_SDK_VERSION)
-        targetSdkVersion(BuildConfig.TARGET_SDK_VERSION)
+        applicationId = BuildConfig.APPLICATION_ID
+        minSdk = BuildConfig.MIN_SDK
+        targetSdk = BuildConfig.TARGET_SDK
         versionCode = BuildConfig.VERSION_CODE
         versionName = BuildConfig.VERSION_NAME
         testInstrumentationRunner = BuildConfig.TEST_INSTRUMENTATION_RUNNER
@@ -36,32 +35,32 @@ android {
     }
 
     kotlinOptions {
-        jvmTarget = "1.8"
+        jvmTarget = Versions.jvm
     }
 
 
 }
 
 dependencies {
-    implementation (project(":core"))
+    //MOdules
+    implementation(project(BuildModules.CORE))
+
     //Kotlin
-    implementation (Kotlin.stdlib)
+    implementation(Dependencies.Kotlin.stdlib)
+
     //Android
-    implementation (Android.coreKTX)
-    implementation (Android.materialX)
-    implementation (Android.constraintLayoutX)
-    implementation (Android.viewmodelX)
-    implementation (Android.fragmentX)
-    implementation(Android.swypeRefreshLayout)
-    implementation(Android.recyclerView)
+    implementation(Dependencies.AndroidX.ktx)
+    implementation(Dependencies.Google.material)
+    implementation(Dependencies.AndroidX.constraintLayout)
 
-    //Hilt
-    implementation (Hilt.hilt)
-    kapt(Hilt.compiler)
+    //Lifecycle
+    implementation(Dependencies.AndroidX.viewmodel)
+    implementation(Dependencies.AndroidX.lifecycle)
+    implementation(Dependencies.AndroidX.livedata)
 
-
-    implementation (Navigation.navUI)
-    implementation (Navigation.navFragment)
+    //Android Navigation
+    implementation(Dependencies.AndroidX.navigation)
+    implementation(Dependencies.AndroidX.navigationUI)
 
 
 }

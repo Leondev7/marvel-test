@@ -4,12 +4,12 @@ buildscript {
         google()
         mavenCentral()
         jcenter()
+        maven("https://oss.sonatype.org/content/repositories/snapshots")
     }
     dependencies {
-        classpath(BuildPlugins.gradle)
-        classpath(BuildPlugins.kotlin)
-        classpath(BuildPlugins.hilt)
-        classpath(BuildPlugins.navigation)
+        classpath(Dependencies.BuildPlugins.gradle)
+        classpath(Dependencies.BuildPlugins.kotlin)
+        classpath(Dependencies.BuildPlugins.navigation)
     }
 }
 

@@ -1,23 +1,27 @@
-import extensions.buildConfigStringField
-import extensions.getLocalProperty
+import java.io.File
+import java.io.FileInputStream
+import java.util.*
 
 plugins {
-    id ("com.android.library")
-    kotlin("android")
-    kotlin("android.extensions")
-    id( "kotlin-kapt")
-    id("dagger.hilt.android.plugin")
+    id(BuildPlugins.ANDROID_LIBRARY)
+    id(BuildPlugins.KOTLIN_ANDROID)
+    id(BuildPlugins.KOTLIN_SERIALIZATION) version  Versions.kotlinSerialization
+}
+val properties = Properties().apply {
+    load(FileInputStream(File(rootProject.rootDir, "local.properties")))
 }
 android {
-    compileSdkVersion(BuildConfig.COMPILE_SDK_VERSION)
-    buildToolsVersion = BuildConfig.BUILD_TOOLS_VERSION
+    compileSdk = BuildConfig.COMPILE_SDK
+    buildToolsVersion = BuildConfig.BUILD_TOOLS
 
     defaultConfig {
-        minSdkVersion(BuildConfig.MIN_SDK_VERSION)
-        targetSdkVersion(BuildConfig.TARGET_SDK_VERSION)
+        applicationId = BuildConfig.APPLICATION_ID
+        minSdk = BuildConfig.MIN_SDK
+        targetSdk = BuildConfig.TARGET_SDK
         versionCode = BuildConfig.VERSION_CODE
         versionName = BuildConfig.VERSION_NAME
         testInstrumentationRunner = BuildConfig.TEST_INSTRUMENTATION_RUNNER
+
     }
 
     packagingOptions {
@@ -43,38 +47,37 @@ android {
 
     buildTypes.forEach {
 
-        it.buildConfigStringField("MARVEL_API_BASE_URL", "gateway.marvel.com")
-        it.buildConfigStringField("CHARACTER_LIST_ENDPOINT", "/v1/public/characters")
-        it.buildConfigStringField("CHARACTER_ENDPOINT", "/v1/public/characters")
-        it.buildConfigStringField("MARVEL_API_KEY_PUBLIC", getLocalProperty("marvel.key.public"))
-        it.buildConfigStringField("MARVEL_API_KEY_PRIVATE", getLocalProperty("marvel.key.private"))
+        it.buildConfigField("String", "MARVEL_API_KEY_PUBLIC",properties.getProperty("marvel.key.public"))
+        it.buildConfigField("String", "MARVEL_API_KEY_PRIVATE",properties.getProperty("marvel.key.private"))
+        //it.buildConfigStringField("MARVEL_API_BASE_URL", "gateway.marvel.com")
+        //it.buildConfigStringField("CHARACTER_LIST_ENDPOINT", "/v1/public/characters")
+        //it.buildConfigStringField("CHARACTER_ENDPOINT", "/v1/public/characters")
     }
 
     kotlinOptions {
-        jvmTarget = "1.8"
+        jvmTarget = Versions.jvm
     }
 }
 
 dependencies {
 
     //Kotlin
-    implementation (Kotlin.stdlib)
-    //Android
-    implementation (Android.coreKTX)
-    implementation (Android.constraintLayoutX)
+    implementation(Dependencies.Kotlin.stdlib)
 
-    //Ktor
-    implementation(Ktor.clientCore)
-    implementation(Ktor.clientCio)
-    implementation(Ktor.clientLogging)
-    implementation(Ktor.clientGson)
-    implementation(Ktor.clientJson)
+    //AndroidX
+    implementation(Dependencies.AndroidX.ktx)
 
-    //Hilt
-    implementation (Hilt.hilt)
-    kapt(Hilt.compiler)
+    //Koin
+    implementation(Dependencies.DI.koin)
 
-    //Glide
-    implementation(Glide.glide)
+    //Network Libs
+    implementation (Dependencies.Network.ktor)
+    implementation (Dependencies.Network.ktorCio)
+    implementation (Dependencies.Network.ktorLog)
+    implementation (Dependencies.Logging.slf4j)
+    implementation (Dependencies.Network.ktorSerialization)
+
+    //UI
+    implementation(Dependencies.Images.coil)
 
 }
