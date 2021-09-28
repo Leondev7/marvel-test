@@ -1,8 +1,5 @@
 package com.leondev7.marveltest.core.network.responses
 
-
-
-
 /**
  * Marvel API character thumbnail network response.
  *

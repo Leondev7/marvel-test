@@ -1,7 +1,7 @@
 package com.leondev7.marveltest.features.characters.presentation.component.characterlist
 
 import android.view.ViewGroup
-import com.leondev7.marveltest.features.characters.domain.model.Character
+import com.leondev7.marveltest.features.characters.domain.entity.CharacterDomainEntity
 import com.leondev7.marveltest.core.components.base.*
 import com.leondev7.marveltest.features.characters.presentation.component.base.CharacterState
 import com.leondev7.marveltest.features.characters.presentation.component.base.ListInteractionEvents
@@ -36,7 +36,7 @@ open class CharacterListComponent(
         uiView.hide()
     }
 
-    private fun updateList(characters : List<Character>){
+    private fun updateList(characters : List<CharacterDomainEntity>){
         uiView.updateCharacters(characters)
     }
 

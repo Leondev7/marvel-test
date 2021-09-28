@@ -8,7 +8,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import com.leondev7.marveltest.core.extensions.getImageByUrlCenterCrop
 import com.leondev7.marveltest.features.characters.R
-import com.leondev7.marveltest.features.characters.domain.model.Character
+import com.leondev7.marveltest.features.characters.domain.entity.CharacterDomainEntity
 import com.leondev7.marveltest.core.components.base.UIView
 
 /**
@@ -31,7 +31,7 @@ class CharacterDetailView(container: ViewGroup) :
         view.visibility = View.GONE
     }
 
-    fun loadCharacterData(character : Character){
+    fun loadCharacterData(character : CharacterDomainEntity){
         val textName = view.findViewById<View>(R.id.character_name) as TextView
         val description = view.findViewById<View>(R.id.character_description) as TextView
         val image = view.findViewById<View>(R.id.dialog_character_image) as ImageView

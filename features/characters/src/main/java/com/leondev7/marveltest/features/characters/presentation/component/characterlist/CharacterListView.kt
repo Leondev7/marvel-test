@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.leondev7.marveltest.features.characters.R
-import com.leondev7.marveltest.features.characters.domain.model.Character
+import com.leondev7.marveltest.features.characters.domain.entity.CharacterDomainEntity
 import com.leondev7.marveltest.core.components.base.UIView
 import com.leondev7.marveltest.features.characters.presentation.component.base.ListInteractionEvents
 import com.leondev7.marveltest.features.characters.presentation.component.characterlist.adapter.CharacterAdapter
@@ -70,7 +70,7 @@ class CharacterListView(container: ViewGroup, listInteractionEvents: ListInterac
     }
 
 
-    fun updateCharacters(characters: List<Character>) {
+    fun updateCharacters(characters: List<CharacterDomainEntity>) {
         view.findViewById<SwipeRefreshLayout>(R.id.swipe_refresh).isRefreshing = false
         adapter.data = characters
         submitState(ListViewState.LOADED)

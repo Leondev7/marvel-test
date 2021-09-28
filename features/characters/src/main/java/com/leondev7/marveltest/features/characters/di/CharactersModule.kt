@@ -1,26 +1,43 @@
 package com.leondev7.marveltest.features.characters.di
 
-import com.leondev7.marveltest.core.network.MarvelApi
 import com.leondev7.marveltest.features.characters.data.CharactersRepository
 import com.leondev7.marveltest.features.characters.domain.repository.ICharactersRepository
-import dagger.Module
-import dagger.Provides
-import dagger.hilt.InstallIn
-import dagger.hilt.components.SingletonComponent
-import javax.inject.Singleton
+import com.leondev7.marveltest.features.characters.domain.usecases.GetCharacterListUseCase
+import com.leondev7.marveltest.features.characters.domain.usecases.GetCharacterUseCase
+import com.leondev7.marveltest.features.characters.presentation.viewmodel.detail.CharacterDetailViewModel
+import com.leondev7.marveltest.features.characters.presentation.viewmodel.CharacterListViewModel
+import org.koin.androidx.viewmodel.dsl.viewModel
+import org.koin.dsl.module
 
 /**
- * Module for injecting Characters feature dependencies
+ * Characters feature module
  */
-@Module
-@InstallIn(SingletonComponent::class)
-class CharactersModule {
+val charactersModule = module {
+    plus(listOf(charactersAndroidModule, charactersUseCaseModule, charactersRepositoryModule))
+}
 
-    /**
-     * Provides a Singleton of [ICharactersRepository]
-     * @param marvelApi The Ktor Marvel API to get the results
-     */
-    @Provides
-    @Singleton
-    fun provideRepo(marvelApi: MarvelApi) :ICharactersRepository = CharactersRepository(marvelApi)
+/**
+ * Positions feature android module
+ * This module is in charge of injecting Android related dependencies like ViewModels
+ */
+val charactersAndroidModule = module {
+    viewModel { CharacterListViewModel(get(),get()) }
+    viewModel { CharacterDetailViewModel(get(),get()) }
+}
+
+/**
+ * Characters feature UseCase module
+ * This module is in charge of injecting Use Cases of the feature
+ */
+val charactersUseCaseModule = module {
+    factory { GetCharacterListUseCase(get()) }
+    factory { GetCharacterUseCase(get()) }
+}
+
+/**
+ * Characters feature Repository module
+ * This module is in charge of injecting Characters Repository
+ */
+val charactersRepositoryModule = module {
+    single<ICharactersRepository> { CharactersRepository(get()) }
 }

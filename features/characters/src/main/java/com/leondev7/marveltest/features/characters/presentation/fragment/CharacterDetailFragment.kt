@@ -16,7 +16,7 @@ import com.leondev7.marveltest.features.characters.presentation.component.charac
 import com.leondev7.marveltest.core.components.empty.EmptyListComponent
 import com.leondev7.marveltest.core.components.error.ErrorComponent
 import com.leondev7.marveltest.core.components.loading.LoadingComponent
-import com.leondev7.marveltest.features.characters.presentation.viewmodel.CharacterDetailViewModel
+import com.leondev7.marveltest.features.characters.presentation.viewmodel.detail.CharacterDetailViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.runBlocking
 

@@ -62,5 +62,9 @@ dependencies {
     implementation(Dependencies.AndroidX.navigation)
     implementation(Dependencies.AndroidX.navigationUI)
 
+    //Dependency Injection
+    implementation(Dependencies.DI.koin)
+    implementation(Dependencies.DI.koinAndroid)
+
 
 }

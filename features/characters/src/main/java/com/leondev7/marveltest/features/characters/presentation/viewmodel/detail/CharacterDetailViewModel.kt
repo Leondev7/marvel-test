@@ -1,23 +1,20 @@
-package com.leondev7.marveltest.features.characters.presentation.viewmodel
+package com.leondev7.marveltest.features.characters.presentation.viewmodel.detail
 
 import androidx.lifecycle.*
 import com.leondev7.marveltest.core.components.base.ComponentState
 import com.leondev7.marveltest.features.characters.domain.repository.ICharactersRepository
 import com.leondev7.marveltest.core.components.base.ScreenState
+import com.leondev7.marveltest.features.characters.domain.usecases.GetCharacterListUseCase
+import com.leondev7.marveltest.features.characters.domain.usecases.GetCharacterUseCase
 import com.leondev7.marveltest.features.characters.presentation.component.base.CharacterState
-import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
-import javax.inject.Inject
 
-
-@HiltViewModel
-class CharacterDetailViewModel @Inject constructor(
+class CharacterDetailViewModel  constructor(
     private val savedStateHandle: SavedStateHandle,
-    private val repository: ICharactersRepository
-
+    private val getCharacterUseCase: GetCharacterUseCase
 ) : ViewModel() {
 
     /**

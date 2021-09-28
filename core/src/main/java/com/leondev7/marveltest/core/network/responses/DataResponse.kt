@@ -1,8 +1,5 @@
 package com.leondev7.marveltest.core.network.responses
 
-
-
-
 /**
  * Marvel API data network response format.
  *

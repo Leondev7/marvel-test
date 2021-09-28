@@ -1,7 +1,7 @@
 package com.leondev7.marveltest.features.characters.presentation.component.characterdetail
 
 import android.view.ViewGroup
-import com.leondev7.marveltest.features.characters.domain.model.Character
+import com.leondev7.marveltest.features.characters.domain.entity.CharacterDomainEntity
 import com.leondev7.marveltest.core.components.base.ComponentState
 import com.leondev7.marveltest.core.components.base.MVIComponent
 import com.leondev7.marveltest.features.characters.presentation.component.base.CharacterState
@@ -35,7 +35,7 @@ open class CharacterDetailComponent(
         uiView.hide()
     }
 
-    private fun loadData(character : Character){
+    private fun loadData(character : CharacterDomainEntity){
         uiView.loadCharacterData(character)
     }
 

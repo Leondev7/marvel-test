@@ -1,6 +1,7 @@
 package com.leondev7.marveltest.ui
 
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import com.leondev7.marveltest.R
 
 /**

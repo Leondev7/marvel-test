@@ -1,6 +1,6 @@
 package com.leondev7.marveltest.features.characters.presentation.component.base
 
-import com.leondev7.marveltest.features.characters.domain.model.Character
+import com.leondev7.marveltest.features.characters.domain.entity.CharacterDomainEntity
 
 /**
  * Interaction events related to the list
@@ -11,6 +11,6 @@ interface ListInteractionEvents {
 
     fun intentEndReached( numberOfItems : Int)
 
-    fun onCharacterClicked(character : Character)
+    fun onCharacterClicked(character : CharacterDomainEntity)
 
 }

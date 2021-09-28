@@ -1,6 +1,5 @@
 package com.leondev7.marveltest.core.network.responses
 
-
 /**
  * Generic network response for any type data [T].
  *

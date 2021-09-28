@@ -16,16 +16,17 @@ import io.ktor.client.request.*
  * @param privateApiKey The marvel private api key
  * @param publicApiKey The marvel public api key
  */
-class HttpClient
+class MarvelHttpClient
 constructor(
     private val privateApiKey: String,
     private val publicApiKey: String
 ) {
+    val HASH = "hash"
+    val APIKEY = "apikey"
+    val TS = "ts"
+
     val httpClient = HttpClient(CIO) {
 
-        install(WebSockets) {
-
-        }
         install(JsonFeature) {
             serializer = KotlinxSerializer(kotlinx.serialization.json.Json {
                 ignoreUnknownKeys = true

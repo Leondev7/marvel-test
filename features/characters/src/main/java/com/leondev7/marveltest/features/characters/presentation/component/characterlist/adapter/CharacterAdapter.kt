@@ -9,7 +9,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.leondev7.marveltest.core.extensions.getImageByUrlCenterCrop
 import com.leondev7.marveltest.features.characters.R
-import com.leondev7.marveltest.features.characters.domain.model.Character
+import com.leondev7.marveltest.features.characters.domain.entity.CharacterDomainEntity
 import kotlin.properties.Delegates
 
 
@@ -23,7 +23,7 @@ internal enum class ItemView(val type: Int) {
 }
 
 
-class CharacterAdapter(data: List<Character> = emptyList(), private val onCharacterClicked: (Character) -> Unit) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class CharacterAdapter(data: List<CharacterDomainEntity> = emptyList(), private val onCharacterClicked: (CharacterDomainEntity) -> Unit) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     var data by Delegates.observable(data) { _, _, _ -> notifyDataSetChanged() }
 

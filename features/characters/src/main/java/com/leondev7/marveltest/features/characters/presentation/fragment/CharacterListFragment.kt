@@ -11,7 +11,7 @@ import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.leondev7.marveltest.features.characters.R
-import com.leondev7.marveltest.features.characters.domain.model.Character
+import com.leondev7.marveltest.features.characters.domain.entity.CharacterDomainEntity
 import com.leondev7.marveltest.core.components.base.UserInteractionEvents
 import com.leondev7.marveltest.features.characters.presentation.component.characterlist.CharacterListComponent
 import com.leondev7.marveltest.core.components.empty.EmptyListComponent
@@ -102,7 +102,7 @@ class CharacterListFragment : Fragment(), UserInteractionEvents, ListInteraction
      * Character clicked event, navigate to detail
      * @param character the character clicked
      */
-    override fun onCharacterClicked(character: Character) {
+    override fun onCharacterClicked(character: CharacterDomainEntity) {
         findNavController(
         ).navigate(
             CharacterListFragmentDirections.
