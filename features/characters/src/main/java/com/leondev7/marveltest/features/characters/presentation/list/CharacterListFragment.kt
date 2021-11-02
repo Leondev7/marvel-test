@@ -1,4 +1,4 @@
-package com.leondev7.marveltest.features.characters.presentation.fragment
+package com.leondev7.marveltest.features.characters.presentation.list
 
 import android.annotation.SuppressLint
 import android.os.Bundle
@@ -7,7 +7,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.constraintlayout.widget.ConstraintLayout
-import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.leondev7.marveltest.features.characters.R
@@ -18,13 +17,11 @@ import com.leondev7.marveltest.core.components.empty.EmptyListComponent
 import com.leondev7.marveltest.core.components.error.ErrorComponent
 import com.leondev7.marveltest.core.components.loading.LoadingComponent
 import com.leondev7.marveltest.features.characters.presentation.component.base.ListInteractionEvents
-import com.leondev7.marveltest.features.characters.presentation.viewmodel.CharacterListViewModel
-import dagger.hilt.android.AndroidEntryPoint
+import org.koin.androidx.viewmodel.ext.android.stateViewModel
 
 /**
  * A fragment representing a list of Items.
  */
-@AndroidEntryPoint
 class CharacterListFragment : Fragment(), UserInteractionEvents, ListInteractionEvents {
 
     lateinit var loadingComponent: LoadingComponent
@@ -33,7 +30,7 @@ class CharacterListFragment : Fragment(), UserInteractionEvents, ListInteraction
     lateinit var characterListComponent: CharacterListComponent
 
 
-    private val charactersViewModel: CharacterListViewModel by activityViewModels()
+    private val viewModel: CharacterListViewModel by stateViewModel()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -52,6 +49,7 @@ class CharacterListFragment : Fragment(), UserInteractionEvents, ListInteraction
      */
     @SuppressLint("CheckResult")
     private fun initComponents(rootViewContainer: ViewGroup) {
+        /*
         loadingComponent = LoadingComponent(
             rootViewContainer,
             lifecycleScope,
@@ -74,28 +72,30 @@ class CharacterListFragment : Fragment(), UserInteractionEvents, ListInteraction
             charactersViewModel.screenState,
             this
         )
+
+         */
     }
 
     /**
      * Retry intent in case of error
      */
     override fun intentTapRetry() {
-        charactersViewModel.getCharactersFromScratch()
+        //viewModel.getCharactersFromScratch()
     }
 
     /**
      * Reload intent in case of swipe
      */
     override fun intentSwipe() {
-        charactersViewModel.getCharactersFromScratch()
+        //viewModel.getCharactersFromScratch()
     }
 
     /**
      * Load more characters in case of list end reached
-     * @param numberOfItems the current number items to load as an offset
+     * @param offset the current number items to load as an offset
      */
-    override fun intentEndReached(numberOfItems: Int) {
-        charactersViewModel.getCharacters(numberOfItems)
+    override fun intentEndReached(limit : Int,offset: Int) {
+        //viewModel.getCharacterList(limit = limit, offset = offset)
     }
 
     /**

@@ -1,5 +1,7 @@
 package com.leondev7.marveltest.core.network.responses
 
+import kotlinx.serialization.Serializable
+
 /**
  * Marvel API data network response format.
  *
@@ -9,10 +11,11 @@ package com.leondev7.marveltest.core.network.responses
  * @param count The total number of results returned by this call.
  * @param results The list of [T] returned by the call.
  */
+@Serializable
 data class DataResponse<T>(
     val offset: Int,
     val limit: Int,
     val total: Int,
     val count: Int,
-    val results: List<T>
+    val results: Array<T>
 )

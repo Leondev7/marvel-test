@@ -1,3 +1,4 @@
+
 import java.io.File
 import java.io.FileInputStream
 import java.util.*
@@ -5,23 +6,17 @@ import java.util.*
 plugins {
     id(BuildPlugins.ANDROID_LIBRARY)
     id(BuildPlugins.KOTLIN_ANDROID)
-    id(BuildPlugins.KOTLIN_SERIALIZATION) version  Versions.kotlinSerialization
 }
 val properties = Properties().apply {
     load(FileInputStream(File(rootProject.rootDir, "local.properties")))
 }
 android {
-    compileSdk = BuildConfig.COMPILE_SDK
-    buildToolsVersion = BuildConfig.BUILD_TOOLS
+    compileSdk =BuildConfig.COMPILE_SDK
+    buildToolsVersion =BuildConfig.BUILD_TOOLS
 
     defaultConfig {
-        applicationId = BuildConfig.APPLICATION_ID
         minSdk = BuildConfig.MIN_SDK
-        targetSdk = BuildConfig.TARGET_SDK
-        versionCode = BuildConfig.VERSION_CODE
-        versionName = BuildConfig.VERSION_NAME
-        testInstrumentationRunner = BuildConfig.TEST_INSTRUMENTATION_RUNNER
-
+        targetSdk =BuildConfig.TARGET_SDK
     }
 
     packagingOptions {
@@ -55,29 +50,32 @@ android {
     }
 
     kotlinOptions {
-        jvmTarget = Versions.jvm
+        jvmTarget = libs.versions.jvm.get()
     }
 }
 
 dependencies {
 
-    //Kotlin
-    implementation(Dependencies.Kotlin.stdlib)
-
     //AndroidX
-    implementation(Dependencies.AndroidX.ktx)
+    implementation(libs.androidx.ktx)
+    implementation(libs.androidx.viewmodel)
+
+    //Navigation
+    implementation (libs.androidx.navigation.fragment)
 
     //Koin
-    implementation(Dependencies.DI.koin)
+    implementation(libs.koin.core)
 
     //Network Libs
-    implementation (Dependencies.Network.ktor)
-    implementation (Dependencies.Network.ktorCio)
-    implementation (Dependencies.Network.ktorLog)
-    implementation (Dependencies.Logging.slf4j)
-    implementation (Dependencies.Network.ktorSerialization)
+    implementation (libs.ktor.cio)
+    implementation (libs.ktor.log)
+    implementation (libs.ktor.serialization)
+    implementation (libs.slf4j)
 
     //UI
-    implementation(Dependencies.Images.coil)
+    implementation(libs.coil)
+
+    testImplementation(libs.bundles.test.suite)
+    testImplementation(libs.testing.ktor)
 
 }

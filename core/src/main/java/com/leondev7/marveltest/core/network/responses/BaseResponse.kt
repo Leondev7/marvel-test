@@ -1,5 +1,7 @@
 package com.leondev7.marveltest.core.network.responses
 
+import kotlinx.serialization.Serializable
+
 /**
  * Generic network response for any type data [T].
  *
@@ -8,8 +10,9 @@ package com.leondev7.marveltest.core.network.responses
  * @param message A more descriptive message of the failure call status.
  * @param data The results returned by the call.
  */
+@Serializable
 data class BaseResponse<T>(
-    val code: Any,
+    val code: Int,
     val status: String,
     val message: String,
     val data: DataResponse<T>

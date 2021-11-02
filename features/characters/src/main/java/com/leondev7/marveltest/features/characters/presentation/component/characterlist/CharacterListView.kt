@@ -50,7 +50,7 @@ class CharacterListView(container: ViewGroup, listInteractionEvents: ListInterac
                 if (!recyclerView.canScrollVertically(1) && newState == RecyclerView.SCROLL_STATE_IDLE && state == ListViewState.LOADED) {
                     submitState(ListViewState.LOADING)
                     val totalItemCount: Int = recyclerView.layoutManager!!.itemCount
-                    listInteractionEvents.intentEndReached(totalItemCount)
+                    listInteractionEvents.intentEndReached(totalItemCount, 0)
                 }
             }
         })

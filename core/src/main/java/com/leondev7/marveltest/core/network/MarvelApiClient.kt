@@ -11,14 +11,13 @@ import io.ktor.client.request.forms.*
 import io.ktor.http.*
 import io.ktor.http.cio.websocket.*
 import kotlinx.coroutines.delay
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.flowOf
-import kotlinx.coroutines.flow.flowOn
-import kotlinx.coroutines.flow.retry
+import kotlinx.coroutines.flow.*
+import java.io.IOException
 import kotlin.coroutines.CoroutineContext
 
 const val LIMIT = "limit"
 const val OFFSET = "offset"
+const val SECURE_SCHEME = "https"
 
 /**
  * Ktor client class with [CIO] for making requests
@@ -28,14 +27,15 @@ const val OFFSET = "offset"
  * @param characterListEndpoint The character list endpoint
  * @param characterEndpoint The character endpoint
  */
-class MarvelApi
+class MarvelApiClient
 constructor(
+    private val retryPolicy : RetryPolicy,
     private val httpClient: HttpClient,
     private val backgroundDispatcher: CoroutineContext,
     private val baseUrl: String,
     private val characterListEndpoint: String,
     private val characterEndpoint: String
-) {
+) : IMarvelApiClient , BaseApiClient(){
 
     /**
      * Gets a list of marvel characters with an encapsulated response
@@ -43,54 +43,40 @@ constructor(
      * @param offset the number characters that we want to skip
      * @return The encapsulated response with a list of characters
      */
-    suspend fun getMarvelCharacters(
+    override suspend fun getMarvelCharacters(
         limit: Int,
         offset: Int
-    ): Flow<BaseResponse<CharacterResponse>> {
-        var currentDelay = 1000L
-        val delayFactor = 2
-        return flowOf<BaseResponse<CharacterResponse>>(httpClient.get(
-            scheme = "https",
+    ): Flow<BaseResponse<CharacterResponse>> = safeApiCall(
+        backgroundDispatcher = backgroundDispatcher,
+        retryPolicy = retryPolicy,
+        apiCall = httpClient.get(
+            scheme = SECURE_SCHEME,
             host = baseUrl,
-            port = 443,
             path = characterListEndpoint
         ) {
             parameter(LIMIT, limit)
             parameter(OFFSET, offset)
-        }).flowOn(
-            backgroundDispatcher
-        ).retry(retries = 3) {
-
-            delay(currentDelay)
-            currentDelay = (currentDelay * delayFactor)
-            return@retry true
         }
-    }
-
-
+    )
 
     /**
      * Gets a marvel character with an encapsulated response
      * @param characterId The id of the character
      * @return The encapsulated response with a single Character
      */
-    suspend fun getCharacterDetail(
+    override suspend fun getCharacterDetail(
         characterId: Long,
-    ): Flow<BaseResponse<CharacterResponse>> =
-        flowOf<BaseResponse<CharacterResponse>>(
-            httpClient.get(
-                scheme = "https",
-                host = baseUrl,
-                port = 443,
-                path = "$characterEndpoint/$characterId"
-            )
-        ).flowOn(
-            backgroundDispatcher
-        ).retry(retries = 3) {
-            val seconds = (1000).toLong()
-            delay(seconds)
-            return@retry true
-        }
+    ): Flow<BaseResponse<CharacterResponse>> = safeApiCall(
+        backgroundDispatcher = backgroundDispatcher,
+        retryPolicy = retryPolicy,
+        apiCall =  httpClient.get(
+            scheme = SECURE_SCHEME,
+            host = baseUrl,
+            path = String.format(characterEndpoint,characterId)
+        )
+    )
+
+
 }
 
 

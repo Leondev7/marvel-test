@@ -5,17 +5,14 @@ plugins {
     id(BuildPlugins.SAFEARGS)
 }
 android {
-    compileSdk = BuildConfig.COMPILE_SDK
+    compileSdk =BuildConfig.COMPILE_SDK
     buildToolsVersion = BuildConfig.BUILD_TOOLS
 
     defaultConfig {
-        applicationId = BuildConfig.APPLICATION_ID
         minSdk = BuildConfig.MIN_SDK
         targetSdk = BuildConfig.TARGET_SDK
-        versionCode = BuildConfig.VERSION_CODE
-        versionName = BuildConfig.VERSION_NAME
-        testInstrumentationRunner = BuildConfig.TEST_INSTRUMENTATION_RUNNER
     }
+
 
     buildTypes {
         getByName("release") {
@@ -34,8 +31,9 @@ android {
         isAbortOnError = true
     }
 
+
     kotlinOptions {
-        jvmTarget = Versions.jvm
+        jvmTarget = libs.versions.jvm.get()
     }
 
 
@@ -45,26 +43,25 @@ dependencies {
     //MOdules
     implementation(project(BuildModules.CORE))
 
-    //Kotlin
-    implementation(Dependencies.Kotlin.stdlib)
-
     //Android
-    implementation(Dependencies.AndroidX.ktx)
-    implementation(Dependencies.Google.material)
-    implementation(Dependencies.AndroidX.constraintLayout)
+    implementation(libs.androidx.ktx)
+    implementation(libs.material)
+    implementation(libs.androidx.constraintlayout)
+    implementation(libs.androidx.swiperefreshlayout)
 
     //Lifecycle
-    implementation(Dependencies.AndroidX.viewmodel)
-    implementation(Dependencies.AndroidX.lifecycle)
-    implementation(Dependencies.AndroidX.livedata)
+    implementation(libs.androidx.viewmodel)
+    implementation(libs.androidx.lifecycle)
+    implementation(libs.androidx.livedata)
 
     //Android Navigation
-    implementation(Dependencies.AndroidX.navigation)
-    implementation(Dependencies.AndroidX.navigationUI)
+    implementation(libs.androidx.navigation.fragment)
+    implementation(libs.androidx.navigation.ui)
 
     //Dependency Injection
-    implementation(Dependencies.DI.koin)
-    implementation(Dependencies.DI.koinAndroid)
+    implementation(libs.koin.android)
 
+    testImplementation(libs.bundles.test.suite)
+    testImplementation(libs.testing.androidx.arch)
 
 }

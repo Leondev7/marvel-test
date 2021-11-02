@@ -1,6 +1,7 @@
 package com.leondev7.marveltest.features.characters.domain.usecases
 
 import com.leondev7.marveltest.core.usecases.UseCaseResult
+import com.leondev7.marveltest.features.characters.domain.entity.CharacterDomainEntity
 import com.leondev7.marveltest.features.characters.domain.repository.ICharactersRepository
 import kotlinx.coroutines.flow.*
 
@@ -18,17 +19,16 @@ class GetCharacterListUseCase(
      * a [List] of [Character] if it's ok
      * [Throwable] if it's ko
      */
-
     suspend operator fun invoke(
         limit : Int, offset : Int
-    ): Flow<UseCaseResult> {
+    ): Flow<UseCaseResult<Array<CharacterDomainEntity>>> {
         return charactersRepository.getCharacters(
             limit = limit,
             offset = offset
         ).map { characters ->
-            UseCaseResult.Success(characters) as UseCaseResult
+            UseCaseResult.Success(characters) as UseCaseResult<Array<CharacterDomainEntity>>
         }.catch { error ->
-            emit(UseCaseResult.Failure(error = error))
+            emit(UseCaseResult.Failure(exception = error))
         }
     }
 

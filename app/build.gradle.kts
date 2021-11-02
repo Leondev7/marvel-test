@@ -1,3 +1,6 @@
+val appVersionName: String by rootProject.extra
+val appVersionCode : String by rootProject.extra
+
 plugins {
     id(BuildPlugins.ANDROID_APPLICATION)
     id(BuildPlugins.KOTLIN_ANDROID)
@@ -13,8 +16,8 @@ android {
         applicationId = BuildConfig.APPLICATION_ID
         minSdk = BuildConfig.MIN_SDK
         targetSdk = BuildConfig.TARGET_SDK
-        versionCode = BuildConfig.VERSION_CODE
-        versionName = BuildConfig.VERSION_NAME
+        versionCode = appVersionCode.toInt()
+        versionName = appVersionName
         testInstrumentationRunner = BuildConfig.TEST_INSTRUMENTATION_RUNNER
     }
     packagingOptions {
@@ -37,7 +40,7 @@ android {
     }
 
     kotlinOptions {
-        jvmTarget = Versions.jvm
+        jvmTarget = libs.versions.jvm.get()
     }
 
 }
@@ -49,21 +52,19 @@ dependencies {
     implementation( project(BuildModules.Features.CHARACTERS))
 
     //Dependency Injection
-    implementation(Dependencies.DI.koin)
-    implementation(Dependencies.DI.koinAndroid)
+    implementation(libs.koin.core)
+    implementation(libs.koin.android)
 
-    //Stdlib
-    implementation( Dependencies.Kotlin.stdlib)
     //Android
-    implementation (Dependencies.AndroidX.ktx)
-    implementation (Dependencies.AndroidX.constraintLayout)
-    implementation (Dependencies.AndroidX.appcompat)
+    implementation (libs.androidx.ktx)
+    implementation (libs.androidx.constraintlayout)
+    implementation (libs.androidx.appcompat)
 
     //Hilt
 
     //Navigation
-    implementation (Dependencies.AndroidX.navigation)
-    implementation (Dependencies.AndroidX.navigationUI)
+    implementation (libs.androidx.navigation.fragment)
+    implementation (libs.androidx.navigation.ui)
 
 
 

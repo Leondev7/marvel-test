@@ -1,22 +1,20 @@
-// Top-level build file where you can add configuration options common to all sub-projects/modules.
+val appVersionName: String by project
+val appVersionCode : String by project
+
 buildscript {
     repositories {
         google()
         mavenCentral()
-        jcenter()
-        maven("https://oss.sonatype.org/content/repositories/snapshots")
+        gradlePluginPortal()
     }
     dependencies {
-        classpath(Dependencies.BuildPlugins.gradle)
-        classpath(Dependencies.BuildPlugins.kotlin)
-        classpath(Dependencies.BuildPlugins.navigation)
+        val libs = project.extensions.getByType<VersionCatalogsExtension>().named("libs") as org.gradle.accessors.dm.LibrariesForLibs
+        classpath(libs.buildPlugin.gradle)
+        classpath(libs.buildPlugin.kotlin)
+        classpath(libs.buildPlugin.navigation)
     }
 }
 
-allprojects {
-    repositories {
-        google()
-        mavenCentral()
-        jcenter()
-    }
+tasks.register("clean", Delete::class) {
+    delete(rootProject.buildDir)
 }

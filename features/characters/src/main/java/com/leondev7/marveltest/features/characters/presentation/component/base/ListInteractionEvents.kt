@@ -9,7 +9,7 @@ interface ListInteractionEvents {
 
     fun intentSwipe()
 
-    fun intentEndReached( numberOfItems : Int)
+    fun intentEndReached(limit : Int, numberOfItems : Int)
 
     fun onCharacterClicked(character : CharacterDomainEntity)
 

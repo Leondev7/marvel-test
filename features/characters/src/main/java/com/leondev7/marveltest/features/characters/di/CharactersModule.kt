@@ -4,8 +4,8 @@ import com.leondev7.marveltest.features.characters.data.CharactersRepository
 import com.leondev7.marveltest.features.characters.domain.repository.ICharactersRepository
 import com.leondev7.marveltest.features.characters.domain.usecases.GetCharacterListUseCase
 import com.leondev7.marveltest.features.characters.domain.usecases.GetCharacterUseCase
-import com.leondev7.marveltest.features.characters.presentation.viewmodel.detail.CharacterDetailViewModel
-import com.leondev7.marveltest.features.characters.presentation.viewmodel.CharacterListViewModel
+import com.leondev7.marveltest.features.characters.presentation.detail.CharacterDetailViewModel
+import com.leondev7.marveltest.features.characters.presentation.list.CharacterListViewModel
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 
@@ -13,7 +13,11 @@ import org.koin.dsl.module
  * Characters feature module
  */
 val charactersModule = module {
-    plus(listOf(charactersAndroidModule, charactersUseCaseModule, charactersRepositoryModule))
+
+    single<ICharactersRepository> { CharactersRepository(get()) }
+    factory { GetCharacterListUseCase(get()) }
+    factory { GetCharacterUseCase(get()) }
+    viewModel { CharacterListViewModel(get()) }
 }
 
 /**
@@ -21,8 +25,8 @@ val charactersModule = module {
  * This module is in charge of injecting Android related dependencies like ViewModels
  */
 val charactersAndroidModule = module {
-    viewModel { CharacterListViewModel(get(),get()) }
-    viewModel { CharacterDetailViewModel(get(),get()) }
+    //viewModel { params -> CharacterListViewModel(params.get(),get()) }
+    //viewModel { CharacterDetailViewModel(get(),get()) }
 }
 
 /**

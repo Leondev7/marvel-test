@@ -1,4 +1,4 @@
-package com.leondev7.marveltest.features.characters.presentation.fragment
+package com.leondev7.marveltest.features.characters.presentation.detail
 
 import android.annotation.SuppressLint
 import android.os.Bundle
@@ -16,15 +16,12 @@ import com.leondev7.marveltest.features.characters.presentation.component.charac
 import com.leondev7.marveltest.core.components.empty.EmptyListComponent
 import com.leondev7.marveltest.core.components.error.ErrorComponent
 import com.leondev7.marveltest.core.components.loading.LoadingComponent
-import com.leondev7.marveltest.features.characters.presentation.viewmodel.detail.CharacterDetailViewModel
-import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.runBlocking
 
 
 /**
  * A fragment representing a list of Items.
  */
-@AndroidEntryPoint
 class CharacterDetailFragment : Fragment(), UserInteractionEvents {
 
     lateinit var loadingComponent: LoadingComponent
@@ -96,7 +93,7 @@ class CharacterDetailFragment : Fragment(), UserInteractionEvents {
      * Retry intent in case of error
      */
     override fun intentTapRetry() {
-        detailViewModel.getCharacterDetail()
+        //detailViewModel.getCharacterDetail()
     }
 
 

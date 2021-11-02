@@ -1,4 +1,4 @@
-package com.leondev7.marveltest.features.characters.presentation.viewmodel.detail
+package com.leondev7.marveltest.features.characters.presentation.detail
 
 import androidx.lifecycle.*
 import com.leondev7.marveltest.core.components.base.ComponentState
@@ -37,13 +37,14 @@ class CharacterDetailViewModel  constructor(
         viewModelScope.launch {
             characterId.collect {
                 if(it!=0L){
-                    getCharacterDetail()
+                    //getCharacterDetail()
                 }
             }
         }
 
     }
 
+    /*
     /**
      * Gets a character with the current ID from the repo.
      * In case of error, retries 3 times and then emits an error
@@ -75,6 +76,8 @@ class CharacterDetailViewModel  constructor(
         }
     }
 
+
+     */
 
 }
 

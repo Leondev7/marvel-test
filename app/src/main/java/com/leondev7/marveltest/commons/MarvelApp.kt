@@ -3,6 +3,7 @@ package com.leondev7.marveltest.commons
 import android.app.Application
 import com.leondev7.marveltest.core.di.coreModule
 import com.leondev7.marveltest.core.network.di.networkModule
+import com.leondev7.marveltest.features.characters.di.charactersModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
 import org.koin.core.context.startKoin
@@ -21,7 +22,8 @@ class MarvelApp : Application() {
             modules(
                 listOf(
                     coreModule,
-                    networkModule
+                    networkModule,
+                    charactersModule
                 )
             )
         }

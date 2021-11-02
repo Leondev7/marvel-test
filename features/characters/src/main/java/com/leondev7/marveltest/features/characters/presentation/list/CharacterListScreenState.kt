@@ -1,4 +1,4 @@
-package com.leondev7.marveltest.features.characters.presentation.viewmodel.list
+package com.leondev7.marveltest.features.characters.presentation.list
 
 
 /**

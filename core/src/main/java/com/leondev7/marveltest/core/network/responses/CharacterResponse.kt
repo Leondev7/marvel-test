@@ -1,5 +1,7 @@
 package com.leondev7.marveltest.core.network.responses
 
+import kotlinx.serialization.Serializable
+
 /**
  * Marvel API character network response item.
  *
@@ -8,6 +10,7 @@ package com.leondev7.marveltest.core.network.responses
  * @param description A short bio or description of the character.
  * @param thumbnail The representative image for this character.
  */
+@Serializable
 data class CharacterResponse(
     val id: Long,
     val name: String,

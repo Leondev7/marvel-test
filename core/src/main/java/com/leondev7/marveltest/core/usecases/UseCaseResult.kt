@@ -1,6 +1,6 @@
 package com.leondev7.marveltest.core.usecases
 
-sealed class UseCaseResult {
-    class Success<T>(val content : T?) : UseCaseResult()
-    class Failure(val error : Throwable) : UseCaseResult()
+sealed class UseCaseResult<out T : Any> {
+    data class Success<out T : Any>(val data : T) : UseCaseResult<T>()
+    data class Failure(val exception: Throwable) : UseCaseResult<Nothing>()
 }

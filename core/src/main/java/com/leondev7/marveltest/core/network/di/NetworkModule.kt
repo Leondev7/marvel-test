@@ -1,20 +1,20 @@
 package com.leondev7.marveltest.core.network.di
 
-import com.leondev7.marveltest.core.network.MarvelApi
-import com.leondev7.marveltest.core.network.MarvelHttpClient
+import com.leondev7.marveltest.core.network.*
 import org.koin.dsl.module
 
 /**
  * Network Module for injecting the api client
  */
 val networkModule = module {
-    single {
-        MarvelApi(
+    single<IMarvelApiClient> {
+        MarvelApiClient(
+            retryPolicy = DefaultRetryPolicy(),
             httpClient = MarvelHttpClient(get(),get()).httpClient,
             backgroundDispatcher = get(),
-            baseUrl = "gateway.marvel.com",
-            characterEndpoint = "/v1/public/characters",
-            characterListEndpoint = "/v1/public/characters"
+            baseUrl = Endpoints.baseUrl,
+            characterEndpoint = Endpoints.characterEndpoint,
+            characterListEndpoint = Endpoints.characterListEndpoint
         )
     }
 }

@@ -1,8 +1,8 @@
 package com.leondev7.marveltest.features.characters.data
 
-import com.leondev7.marveltest.core.network.MarvelApi
-import com.leondev7.marveltest.features.characters.domain.repository.ICharactersRepository
+import com.leondev7.marveltest.core.network.IMarvelApiClient
 import com.leondev7.marveltest.features.characters.domain.entity.CharacterDomainEntity
+import com.leondev7.marveltest.features.characters.domain.repository.ICharactersRepository
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 
@@ -11,7 +11,7 @@ import kotlinx.coroutines.flow.map
  */
 class CharactersRepository
 constructor(
-    private val marvelApi: MarvelApi
+    private val apiClient: IMarvelApiClient
 ) : ICharactersRepository {
 
     /**
@@ -20,12 +20,14 @@ constructor(
      * @param offset the number of characters to skip
      * @return The list of characters
      */
-    override suspend fun getCharacters(limit: Int, offset: Int): Flow<List<CharacterDomainEntity>> {
-        return marvelApi.getMarvelCharacters(
+    override suspend fun getCharacters(limit: Int, offset: Int): Flow<Array<CharacterDomainEntity>> {
+       return apiClient.getMarvelCharacters(
             limit = limit,
             offset = offset
         ).map { response ->
-            response.data.results.map { it.toDomainModel() }
+            response.data.results.map {
+                it.toDomainModel()
+            }.toTypedArray()
         }
     }
 
@@ -35,12 +37,10 @@ constructor(
      * @return A single character
      */
     override suspend fun getCharacterDetail(characterId: Long): Flow<CharacterDomainEntity?> {
-        return marvelApi.getCharacterDetail(
+        return apiClient.getCharacterDetail(
             characterId = characterId,
         ).map { response ->
             response.data.results.map { it.toDomainModel() }.firstOrNull()
-
         }
-
     }
 }
